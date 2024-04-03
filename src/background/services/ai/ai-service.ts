@@ -190,9 +190,9 @@ export class AIService {
       });
       chatHistory.push(...messages);
     }
-
+// this is where general is being called from ai side
     if (queryMode === "general") {
-      await executeGeneralChat(
+       await executeGeneralChat(
         streamingModel,
         msg.payload.prompt,
         chatHistory,
@@ -219,7 +219,7 @@ export class AIService {
       await executeWebpageVisionChat(
         modelProvider,
         msg.payload.prompt,
-        msg.payload.imageData,
+        msg.payload.vocalData,
         chatHistory,
         streamingModel,
         abortController,

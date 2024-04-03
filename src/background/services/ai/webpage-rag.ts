@@ -46,6 +46,7 @@ export async function executeWebpageRAG(
       signal: abortController.signal,
     },
     {
+      // chain.call Model will respond -> response -> callback -> store response
       callbacks: [
         {
           handleLLMNewToken(token: string) {

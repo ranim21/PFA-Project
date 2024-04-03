@@ -26,13 +26,13 @@ interface ChatUIProps {
   error: string;
   queryMode: QueryMode;
   modelConfig: ModelConfig | null;
-  imageData: string | null;
+  vocalData: string | null;
   setError: (error: string) => void;
   clearChatContext: () => void;
   processUserPrompt: (prompt: string) => Promise<void>;
   stopPromptProcessing: () => void;
   setQueryMode: (mode: QueryMode) => void;
-  clearImageData: () => void;
+  clearvocalData: () => void;
 }
 
 export const ChatUI = ({
@@ -42,13 +42,13 @@ export const ChatUI = ({
   error,
   queryMode,
   modelConfig,
-  imageData,
+  vocalData,
   setError,
   clearChatContext,
   processUserPrompt,
   stopPromptProcessing,
   setQueryMode,
-  clearImageData,
+  clearvocalData,
 }: ChatUIProps): JSX.Element => {
   const formRef = useRef<HTMLFormElement>(null);
   const [showLoader, setShowLoader] = useState(false);
@@ -96,7 +96,7 @@ export const ChatUI = ({
 
   const handleSegmentedControlChange = (value: QueryMode) => {
     setQueryMode(value);
-    clearImageData();
+    clearvocalData();
   };
 
   const lastMessage = messages[messages.length - 1];
@@ -225,7 +225,7 @@ export const ChatUI = ({
                 Send
               </Button>
             </Group>
-            {imageData && (
+            {vocalData && (
               <Box
                 sx={{
                   width: "fit-content",
@@ -233,14 +233,14 @@ export const ChatUI = ({
                   borderWidth: "0.5px",
                 }}
               >
-                <ActionIcon onClick={clearImageData}>
+                <ActionIcon onClick={clearvocalData}>
                   <IconX size="16px" />
                 </ActionIcon>
                 <Image
                   width="100px"
                   height="100px"
                   fit="contain"
-                  src={imageData}
+                  src={vocalData}
                   withPlaceholder
                   placeholder={<Text>Image preview unavailable</Text>}
                 />

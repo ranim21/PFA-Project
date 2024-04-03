@@ -57,7 +57,7 @@ export function SidePanel(): JSX.Element {
     apiKey?: string;
     config: ModelConfig;
   } | null>(null);
-  const [imageData, setImageData] = useState<string | null>(null);
+  const [vocalData, setvocalData] = useState<string | null>(null);
   const [tabId, setTabId] = useState<number | null>(null);
 
   const manifest = chrome.runtime.getManifest();
@@ -184,7 +184,7 @@ export function SidePanel(): JSX.Element {
             queryMode,
             prompt,
             prevMessages,
-            imageData,
+            vocalData,
           } as AppMessagePayloadWebpageVQA,
         } as AppMessageBotExecute);
       } else {
@@ -198,7 +198,7 @@ export function SidePanel(): JSX.Element {
         } as AppMessageBotExecute);
       }
     },
-    [analyzeWebpage, imageData, swPort, webpageMarkdown]
+    [analyzeWebpage, vocalData, swPort, webpageMarkdown]
   );
 
   const handleStopPromptProcessing = useCallback(() => {
@@ -214,7 +214,7 @@ export function SidePanel(): JSX.Element {
   const clearSessionState = useCallback(() => {
     setWebpageMarkdown("");
     setMessages([]);
-    setImageData(null);
+    setvocalData(null);
   }, []);
 
   const updateModelConfig = useCallback(
@@ -335,8 +335,8 @@ export function SidePanel(): JSX.Element {
     [processUserPrompt]
   );
 
-  const handleImageCapture = useCallback((imageData: string) => {
-    setImageData(imageData);
+  const handleImageCapture = useCallback((vocalData: string) => {
+    setvocalData(vocalData);
   }, []);
 
   useSidePanelMessageListener(
@@ -364,7 +364,7 @@ export function SidePanel(): JSX.Element {
     !selectedModel ||
     requiresApiKey ||
     isBotProcessing ||
-    (queryMode === "webpage-vqa" && !imageData);
+    (queryMode === "webpage-vqa" && !vocalData);
 
   return (
     <AppContext.Provider
@@ -437,7 +437,7 @@ export function SidePanel(): JSX.Element {
             </Button>
           </Alert>
         )}
-        {queryMode === "webpage-vqa" && !imageData && (
+        {queryMode === "webpage-vqa" && !vocalData && (
           <Alert icon={<IconAlertCircle size={16} />} color="red">
             Please capture image
           </Alert>
@@ -454,8 +454,8 @@ export function SidePanel(): JSX.Element {
           queryMode={queryMode}
           setQueryMode={setQueryMode}
           modelConfig={selectedModel?.config || null}
-          imageData={imageData}
-          clearImageData={() => setImageData(null)}
+          vocalData={vocalData}
+          clearvocalData={() => setvocalData(null)}
         />
       </Paper>
     </AppContext.Provider>

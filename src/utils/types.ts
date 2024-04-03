@@ -163,7 +163,7 @@ export type AppMessagePayloadWebpageTextQA = {
 export type AppMessagePayloadWebpageVQA = {
   queryMode: "webpage-vqa";
   prompt: string;
-  imageData: string;
+  vocalData: string;
   prevMessages: ChatMessage[];
 };
 
