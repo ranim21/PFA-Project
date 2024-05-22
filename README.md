@@ -1,4 +1,4 @@
-# Webgati AI
+# Translation Extension AI
 
 - Interactive Sidebar: Open a chat by clicking the extension icon, ask questions or seek summaries from any webpage effortlessly.
 
